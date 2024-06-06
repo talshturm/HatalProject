@@ -2,12 +2,21 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
 @Entity('users')
 export class User {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'user_id' })
     id: number;
 
-    @Column()
+    @Column({ name: "username" })
+    username: string;
+
+    @Column({ name: "first_name" })
     firstName: string;
 
-    @Column()
+    @Column({ name: 'last_name' })
     lastName: string;
+
+    @Column({ name: 'password'})
+    password: string;
+
+    @Column({ name: 'email' })
+    email: string;
 }

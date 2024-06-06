@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { User } from "../entities/user.entity";
 import { AppDataSource } from "../data-source";
+import { getAllService, getByIdService, deleteUserService, createUserService, updateUserService } from "../Services/userService";
 
 const userRepository = AppDataSource.getRepository(User);
 
 const getAll = async (req: Request, res: Response) => {
     try {
-        const users = await userRepository.find();
+        const users = await getAllService();
         res.send(users);
       } catch (error) {
         res.status(500).send("Internal server error");
@@ -16,7 +17,7 @@ const getAll = async (req: Request, res: Response) => {
 const getById = async (req: Request, res: Response) => {
     const id = Number(req.params);
     try {
-      const user = await userRepository.findOneBy({ id });
+      const user = await getByIdService(id);
       if (user) {
         res.send(user);
       } else {
@@ -34,7 +35,7 @@ const createUser = async (req: Request, res: Response) => {
     user.lastName = lastName;
 
     try {
-      const savedUser = await userRepository.save(user);
+      const savedUser = await createUserService(firstName, lastName);
       res.status(201).send(savedUser);
     } catch (error) {
       res.status(409).send("User creation failed");
@@ -44,19 +45,8 @@ const createUser = async (req: Request, res: Response) => {
 const updateUser = async (req: Request, res: Response) => {
     const id = Number(req.params);
     const { firstName, lastName, age } = req.body;
-
     try {
-      const user = await userRepository.findOneBy({ id });
-
-      if (!user) {
-        res.status(404).send("User not found");
-        return;
-      }
-
-      user.firstName = firstName;
-      user.lastName = lastName;
-
-      await userRepository.save(user);
+      await updateUserService(id, firstName, lastName);
       res.status(204).send();
     } catch (error) {
       res.status(409).send("User update failed");
@@ -65,16 +55,8 @@ const updateUser = async (req: Request, res: Response) => {
 
 const deleteUser = async (req: Request, res: Response) => {
     const id = Number(req.params);
-
     try {
-      const user = await userRepository.findOneBy({id});
-
-      if (!user) {
-        res.status(404).send("User not found");
-        return;
-      }
-
-      await userRepository.remove(user);
+      await deleteUserService(id);
       res.status(204).send();
     } catch (error) {
       res.status(409).send("User deletion failed");
