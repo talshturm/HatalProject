@@ -1,4 +1,6 @@
 import { Repository } from "typeorm";
-import { myDataSource }
+import { User } from "../entities/user.entity";
+import { AppDataSource } from "../data-source";
 
-const userRepository = await myDataSource.getRepository(User); 
+const userRepository = AppDataSource.getRepository(User);
+

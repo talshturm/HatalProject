@@ -1,56 +1,61 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
 import { User } from "../entities/user.entity";
+import { AppDataSource } from "../data-source";
+
+const userRepository = AppDataSource.getRepository(User);
 
 const getAll = async (req: Request, res: Response) => {
-    const userRepository = getRepository(User);
-    const users = await userRepository.find();
-    res.send(users);
+    try {
+        const users = await userRepository.find();
+        res.send(users);
+      } catch (error) {
+        res.status(500).send("Internal server error");
+      }
   };
 
 const getById = async (req: Request, res: Response) => {
-    const id:number  = req.params;
-    const userRepository = getRepository(User);
+    const id = Number(req.params);
     try {
-      const user = await userRepository.findOne(id);
-      res.send(user);
+      const user = await userRepository.findOneBy({ id });
+      if (user) {
+        res.send(user);
+      } else {
+        res.status(404).send("User not found");
+      }
     } catch (error) {
-      res.status(404).send("User not found");
+      res.status(500).send("Internal server error");
     }
   };
 
 const createUser = async (req: Request, res: Response) => {
-    const { firstName, lastName, age } = req.body;
+    const { firstName, lastName } = req.body;
     const user = new User();
     user.firstName = firstName;
     user.lastName = lastName;
 
-    const userRepository = getRepository(User);
     try {
-      await userRepository.save(user);
-      res.status(201).send(user);
+      const savedUser = await userRepository.save(user);
+      res.status(201).send(savedUser);
     } catch (error) {
       res.status(409).send("User creation failed");
     }
   };
 
 const updateUser = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const id = Number(req.params);
     const { firstName, lastName, age } = req.body;
-    const userRepository = getRepository(User);
-    let user;
 
     try {
-      user = await userRepository.findOneOrFail(id);
-    } catch (error) {
-      res.status(404).send("User not found");
-      return;
-    }
+      const user = await userRepository.findOneBy({ id });
 
-    user.firstName = firstName;
-    user.lastName = lastName;
+      if (!user) {
+        res.status(404).send("User not found");
+        return;
+      }
 
-    try {
+      user.firstName = firstName;
+      user.lastName = lastName;
+
       await userRepository.save(user);
       res.status(204).send();
     } catch (error) {
@@ -59,19 +64,21 @@ const updateUser = async (req: Request, res: Response) => {
   };
 
 const deleteUser = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const userRepository = getRepository(User);
-    let user;
+    const id = Number(req.params);
 
     try {
-      user = await userRepository.findOneOrFail(id);
-    } catch (error) {
-      res.status(404).send("User not found");
-      return;
-    }
+      const user = await userRepository.findOneBy({id});
 
-    userRepository.delete(id);
-    res.status(204).send();
+      if (!user) {
+        res.status(404).send("User not found");
+        return;
+      }
+
+      await userRepository.remove(user);
+      res.status(204).send();
+    } catch (error) {
+      res.status(409).send("User deletion failed");
+    }
   };
 
 export { getAll, getById, deleteUser, updateUser, createUser };
