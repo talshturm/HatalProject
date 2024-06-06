@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../entities/user.entity";
-import { AppDataSource } from "../data-source";
 import { getAllService, getByIdService, deleteUserService, createUserService, updateUserService } from "../Services/userService";
-
-const userRepository = AppDataSource.getRepository(User);
 
 const getAll = async (req: Request, res: Response) => {
     try {
