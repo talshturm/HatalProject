@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { getAllService, getByIdService, deleteOrderService, updateOrderService, createOrderService } from "../Services/orderService";
+import { getAllService, getByIdService, deleteOrderService, updateOrderService, createOrderService, updateStatusService } from "../Services/orderService";
 import { StatusCodes } from "http-status-codes";
+import { OrderStatus } from "../entities/orderStatus";
 
 const getAll = async (req: Request, res: Response) => {
     try {
@@ -57,6 +58,19 @@ const getById = async (req: Request, res: Response) => {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Internal server error");
     }
 };
+
+const updateStatus = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    console.log(parseInt(id));
+
+    try {
+        await updateStatusService(parseInt(id), status as OrderStatus);
+        res.status(StatusCodes.OK).json({ message: 'Status updated successfully' });
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Internal server error");
+    }
+};
   
 
-export { getAll, getById, deleteOrder, updateOrder, createOrder };
+export { getAll, getById, deleteOrder, updateOrder, createOrder, updateStatus };

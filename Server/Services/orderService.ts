@@ -2,6 +2,7 @@ import { Order } from "../entities/order.entity";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/user.entity";
 import { Product } from "../entities/product.entity";
+import { OrderStatus } from "../entities/orderStatus";
 
 const orderRepository = AppDataSource.getRepository(Order);
 
@@ -27,7 +28,7 @@ const orderRepository = AppDataSource.getRepository(Order);
     return order;
 };
 
-const createOrderService = async (userId: number, productIds: number[], status: string, orderDate: Date): Promise<Order> => {
+const createOrderService = async (userId: number, productIds: number[], status: OrderStatus, orderDate: Date): Promise<Order> => {
     const userRepository = AppDataSource.getRepository(User);
     const productRepository = AppDataSource.getRepository(Product);
 
@@ -57,7 +58,7 @@ const createOrderService = async (userId: number, productIds: number[], status: 
     return await orderRepository.save(order);
 };
 
-const updateOrderService = async (orderId: number, userId: number, productIds: number[], status: string, orderDate: Date): Promise<Order> => {
+const updateOrderService = async (orderId: number, userId: number, productIds: number[], status: OrderStatus, orderDate: Date): Promise<Order> => {
     const userRepository = AppDataSource.getRepository(User);
     const productRepository = AppDataSource.getRepository(Product);
 
@@ -97,5 +98,16 @@ const deleteOrderService = async (id: number): Promise<void> => {
    await orderRepository.remove(order);
  };
 
+ const updateStatusService = async (id: number, status: OrderStatus): Promise<Order> => {
+    const order = await orderRepository.findOneBy({ id });
 
-  export { getAllService, getByIdService, deleteOrderService, updateOrderService, createOrderService };
+    if (!order) {
+        throw new Error(`Order with ID ${id} not found`);
+    }
+
+    order.status = status;
+    return await orderRepository.save(order);
+};
+
+
+  export { getAllService, getByIdService, deleteOrderService, updateOrderService, createOrderService, updateStatusService };

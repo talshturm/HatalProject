@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, JoinColumn } from 'typeorm';
 import { User } from './user.entity';
 import { Product } from './product.entity';
+import { OrderStatus } from './orderStatus';
 
 @Entity("orders")
 export class Order {
@@ -14,8 +15,12 @@ export class Order {
     @Column({ type: 'numeric', name:'total_price' })
     totalPrice: number;
 
-    @Column()
-    status: string;
+    @Column({
+        type: 'enum',
+        enum: OrderStatus,
+        default: OrderStatus.PENDING
+    })
+    status: OrderStatus;
 
     @Column({ name:'order_date' })
     orderDate: Date;
