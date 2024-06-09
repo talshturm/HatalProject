@@ -15,6 +15,6 @@ export class OrderProduct {
     @JoinColumn({ name: 'product_id' })
     product: Product;
 
-    @Column('int')
+    @Column()
     quantity: number;
 }

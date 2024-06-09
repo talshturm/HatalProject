@@ -16,6 +16,9 @@ export class Order {
     @Column({name: 'order_date'})
     orderDate: Date;
 
+    @Column()
+    status: string;
+
     @OneToMany(() => OrderProduct, orderProduct => orderProduct.order)
     orderProducts: OrderProduct[];
 }
