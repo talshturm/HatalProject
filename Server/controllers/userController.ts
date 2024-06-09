@@ -12,9 +12,9 @@ const getAll = async (req: Request, res: Response) => {
   };
 
 const getById = async (req: Request, res: Response) => {
-    const id = Number(req.params);
+    const { id } = req.params;
     try {
-      const user = await getByIdService(id);
+      const user = await getByIdService(parseInt(id));
       if (user) {
         res.send(user);
       } else {
@@ -38,29 +38,29 @@ const createUser = async (req: Request, res: Response) => {
     try {
       const savedUser = await createUserService(username, firstName,
         lastName, password, address, email);
-      res.status(201).send(savedUser);
+      res.status(201).json({ message: 'User created successfully', user });
     } catch (error) {
       res.status(409).send("User creation failed");
     }
   };
 
 const updateUser = async (req: Request, res: Response) => {
-    const id = Number(req.params);
+    const { id } = req.params;
     const { username, firstName, lastName, password, address, email } = req.body;
     try {
-      await updateUserService(id, username, firstName,
+      await updateUserService(parseInt(id), username, firstName,
         lastName, password, address, email);
-      res.status(204).send();
+      res.status(204).json({ message: 'User updated successfully'});
     } catch (error) {
       res.status(409).send("User update failed");
     }
   };
 
 const deleteUser = async (req: Request, res: Response) => {
-    const id = Number(req.params);
+    const { id } = req.params;
     try {
-      await deleteUserService(id);
-      res.status(204).send();
+      await deleteUserService(parseInt(id));
+      res.status(204).json({message: 'User deleted successfully'});
     } catch (error) {
       res.status(409).send("User deletion failed");
     }
