@@ -26,13 +26,18 @@ const getById = async (req: Request, res: Response) => {
   };
 
 const createUser = async (req: Request, res: Response) => {
-    const { firstName, lastName } = req.body;
+    const { username, firstName, lastName, password, address, email } = req.body;
     const user = new User();
     user.firstName = firstName;
     user.lastName = lastName;
+    user.username = username;
+    user.password = password;
+    user.address = address;
+    user.email = email;
 
     try {
-      const savedUser = await createUserService(firstName, lastName);
+      const savedUser = await createUserService(username, firstName,
+        lastName, password, address, email);
       res.status(201).send(savedUser);
     } catch (error) {
       res.status(409).send("User creation failed");
@@ -41,9 +46,10 @@ const createUser = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
     const id = Number(req.params);
-    const { firstName, lastName, age } = req.body;
+    const { username, firstName, lastName, password, address, email } = req.body;
     try {
-      await updateUserService(id, firstName, lastName);
+      await updateUserService(id, username, firstName,
+        lastName, password, address, email);
       res.status(204).send();
     } catch (error) {
       res.status(409).send("User update failed");

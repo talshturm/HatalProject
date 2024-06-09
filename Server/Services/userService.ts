@@ -11,19 +11,29 @@ const getByIdService = async (id: number) => {
     return await userRepository.findOneBy({ id });
   };
 
-const createUserService = async (firstName: string, lastName: string) => {
+const createUserService = async (username: string, firstName: string,
+     lastName: string, password: string, address: string, email: string) => {
     const user = new User();
     user.firstName = firstName;
     user.lastName = lastName;
+    user.username = username;
+    user.password = password;
+    user.address = address;
+    user.email = email;
     return await userRepository.save(user);
   };
 
-const updateUserService = async (id: number, firstName: string, lastName: string) => {
+const updateUserService = async (id: number, username: string, firstName: string,
+    lastName: string, password: string, address: string, email: string) => {
     const user = await userRepository.findOneBy({ id });
     if (!user) throw new Error("User not found");
     
     user.firstName = firstName;
     user.lastName = lastName;
+    user.username = username;
+    user.password = password;
+    user.address = address;
+    user.email = email;
     return await userRepository.save(user);
   };
 
