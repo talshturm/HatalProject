@@ -19,7 +19,11 @@ export class Order {
     @Column()
     status: string;
 
-    @ManyToMany(() => Product, product => product.orders)
-    @JoinTable()
+    @ManyToMany(() => Product)
+    @JoinTable({
+        name: 'order_products',
+        joinColumn: { name: 'order_id', referencedColumnName: 'id' },
+        inverseJoinColumn: { name: 'product_id', referencedColumnName: 'id' }
+    })
     products: Product[];
 }

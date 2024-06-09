@@ -14,7 +14,4 @@ export class Product {
 
     @Column()
     price: number;
-
-    @ManyToMany(() => Order, order => order.products)
-    orders: Order[];
 }

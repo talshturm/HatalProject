@@ -7,9 +7,7 @@ const orderRepository = AppDataSource.getRepository(Order);
 
 
  const getAllService = async (): Promise<Order[]> => {
-        const orders = await orderRepository.find({
-            relations: ['products'] 
-        });
+        const orders = await orderRepository.find();
 
         return orders;
   };
@@ -27,7 +25,7 @@ const orderRepository = AppDataSource.getRepository(Order);
     return order;
 };
 
-const createOrderService = async (userId: number, productIds: number[], status: string): Promise<Order> => {
+const createOrderService = async (userId: number, productIds: number[], status: string, orderDate: Date): Promise<Order> => {
     const userRepository = AppDataSource.getRepository(User);
     const productRepository = AppDataSource.getRepository(Product);
 
@@ -50,11 +48,14 @@ const createOrderService = async (userId: number, productIds: number[], status: 
     order.products = products;
     order.totalPrice = totalPrice;
     order.status = status;
+    order.orderDate = orderDate;
+
+    console.log(order);
 
     return await orderRepository.save(order);
 };
 
-const updateOrderService = async (orderId: number, userId: number, productIds: number[], status: string): Promise<Order> => {
+const updateOrderService = async (orderId: number, userId: number, productIds: number[], status: string, orderDate: Date): Promise<Order> => {
     const userRepository = AppDataSource.getRepository(User);
     const productRepository = AppDataSource.getRepository(Product);
 
@@ -81,6 +82,7 @@ const updateOrderService = async (orderId: number, userId: number, productIds: n
     order.products = products;
     order.totalPrice = totalPrice;
     order.status = status;
+    order.orderDate = orderDate;
 
     return await orderRepository.save(order);
 };
