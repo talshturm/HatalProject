@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User } from "../entities/user.entity";
+import { HttpStatus, httpStatusTextByCode } from "http-status-ts";
 import { getAllService, getByIdService, deleteUserService, createUserService, updateUserService } from "../Services/userService";
 
 const getAll = async (req: Request, res: Response) => {
@@ -7,7 +7,7 @@ const getAll = async (req: Request, res: Response) => {
         const users = await getAllService();
         res.send(users);
       } catch (error) {
-        res.status(500).send("Internal server error");
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
       }
   };
 
@@ -18,10 +18,10 @@ const getById = async (req: Request, res: Response) => {
       if (user) {
         res.send(user);
       } else {
-        res.status(404).send("User not found");
+        res.status(HttpStatus.NOT_FOUND).send("User not found");
       }
     } catch (error) {
-      res.status(500).send("Internal server error");
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
     }
   };
 
@@ -31,9 +31,9 @@ const createUser = async (req: Request, res: Response) => {
     try {
        await createUserService(username, firstName,
         lastName, password, address, email);
-      res.status(201).json({ message: 'User created successfully'});
+      res.status(HttpStatus.CREATED).json({ message: 'User created successfully'});
     } catch (error) {
-      res.status(409).send("User creation failed");
+      res.status(HttpStatus.CONFLICT).send("User creation failed");
     }
   };
 
@@ -43,9 +43,9 @@ const updateUser = async (req: Request, res: Response) => {
     try {
       await updateUserService(parseInt(id), username, firstName,
         lastName, password, address, email);
-      res.status(204).json({ message: 'User updated successfully'});
+      res.status(HttpStatus.OK).json({ message: 'User updated successfully'});
     } catch (error) {
-      res.status(409).send("User update failed");
+      res.status(HttpStatus.CONFLICT).send("User update failed");
     }
   };
 
@@ -53,9 +53,9 @@ const deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
       await deleteUserService(parseInt(id));
-      res.status(204).json({message: 'User deleted successfully'});
+      res.status(HttpStatus.OK).json({message: 'User deleted successfully'});
     } catch (error) {
-      res.status(409).send("User deletion failed");
+      res.status(HttpStatus.CONFLICT).send("User deletion failed");
     }
   };
 
