@@ -36,26 +36,27 @@ const getById = async (req: Request, res: Response) => {
   };
 
   const updateOrder = async (req: Request, res: Response) => {
-    const { id } = req.params;
-    const { name, description, price } = req.body;
+    const { orderId } = req.params;
+    const { userId, productIds, status } = req.body;
+
     try {
-      await updateOrderService(parseInt(id), name, description, price);
-      res.status(HttpStatus.OK).json({ message: 'Order updated successfully'});
+        await updateOrderService(parseInt(orderId), userId, productIds, status);
+        res.status(HttpStatus.OK).json({ message: 'Order updated successfully' });
     } catch (error) {
-      res.status(HttpStatus.CONFLICT).send("Order update failed");
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
     }
-  };
+};
 
   const createOrder = async (req: Request, res: Response) => {
-    const { name, description, price } = req.body;
+    const { userId, productIds, status } = req.body;
 
     try {
-       await createOrderService(name, description, price);
-      res.status(HttpStatus.CREATED).json({ message: 'Order created successfully'});
+        const order = await createOrderService(userId, productIds, status);
+        res.status(HttpStatus.CREATED).json({ message: 'Order created successfully'});
     } catch (error) {
-      res.status(HttpStatus.CONFLICT).send("Order creation failed");
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
     }
-  };
+};
   
 
 export { getAll, getById, deleteOrder, updateOrder, createOrder };
