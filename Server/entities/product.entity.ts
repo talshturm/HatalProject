@@ -1,22 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm"
 
 @Entity('products')
 export class Product {
-    @PrimaryGeneratedColumn({ name: 'user_id' })
+    @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ name: "username" })
-    username: string;
+    @Column()
+    name: string;
 
-    @Column({ name: "first_name" })
-    firstName: string;
+    @Column()
+    description: string;
 
-    @Column({ name: 'last_name' })
-    lastName: string;
+    @Column()
+    price: number;
 
-    @Column({ name: 'password'})
-    password: string;
-
-    @Column({ name: 'email' })
-    email: string;
+    @ManyToMany(() => OrderProduct, OrderProduct => orderProduct.product)
+    orderProduct: OrderProduct[];
 }
