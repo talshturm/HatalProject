@@ -11,4 +11,29 @@ const getByIdService = async (id: number) => {
     return await productRepository.findOneBy({ id });
   };
 
-  export { getAllService, getByIdService };
+  const createProductService = async (name: string, description: string, price: number) => {
+   const product = new Product();
+   product.name = name;
+   product.description = description;
+   product.price = price;
+   return await productRepository.save(product);
+ };
+
+const updateProductService = async (id: number, name: string, description: string, price: number) => {
+   const product = await productRepository.findOneBy({ id });
+   if (!product) throw new Error("User not found");
+   
+   product.name = name;
+   product.description = description;
+   product.price = price;
+   return await productRepository.save(product);
+ };
+
+const deleteProductService = async (id: number) => {
+   const product = await productRepository.findOneBy({ id });
+   if (!product) throw new Error("Product not found");
+   await productRepository.remove(product);
+ };
+
+
+  export { getAllService, getByIdService, deleteProductService, updateProductService, createProductService };

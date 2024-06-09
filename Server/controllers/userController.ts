@@ -27,18 +27,11 @@ const getById = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
     const { username, firstName, lastName, password, address, email } = req.body;
-    const user = new User();
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.username = username;
-    user.password = password;
-    user.address = address;
-    user.email = email;
 
     try {
-      const savedUser = await createUserService(username, firstName,
+       await createUserService(username, firstName,
         lastName, password, address, email);
-      res.status(201).json({ message: 'User created successfully', user });
+      res.status(201).json({ message: 'User created successfully'});
     } catch (error) {
       res.status(409).send("User creation failed");
     }

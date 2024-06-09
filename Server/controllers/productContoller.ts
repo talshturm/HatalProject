@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllService, getByIdService, deleteProductService, updateProductService } from "../Services/productService";
+import { getAllService, getByIdService, deleteProductService, updateProductService, createProductService } from "../Services/productService";
 
 const getAll = async (req: Request, res: Response) => {
     try {
@@ -45,5 +45,16 @@ const getById = async (req: Request, res: Response) => {
     }
   };
 
+  const createProduct = async (req: Request, res: Response) => {
+    const { name, description, price } = req.body;
 
-export { getAll, getById, deleteProduct, updateProduct };
+    try {
+       await createProductService(name, description, price);
+      res.status(201).json({ message: 'Product created successfully'});
+    } catch (error) {
+      res.status(409).send("Product creation failed");
+    }
+  };
+  
+
+export { getAll, getById, deleteProduct, updateProduct, createProduct };
