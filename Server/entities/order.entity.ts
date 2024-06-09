@@ -1,23 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, JoinColumn } from 'typeorm';
 import { User } from './user.entity';
 import { Product } from './product.entity';
 
-@Entity()
+@Entity("orders")
 export class Order {
     @PrimaryGeneratedColumn()
     id: number;
 
     @ManyToOne(() => User, user => user.orders)
+    @JoinColumn({ name: 'user_id' })
     user: User;
 
-    @Column({name: 'total_price'})
+    @Column({ type: 'numeric', name:'total_price' })
     totalPrice: number;
-
-    @Column({name: 'order_date'})
-    orderDate: Date;
 
     @Column()
     status: string;
+
+    @Column({ name:'order_date' })
+    orderDate: Date;
 
     @ManyToMany(() => Product)
     @JoinTable({

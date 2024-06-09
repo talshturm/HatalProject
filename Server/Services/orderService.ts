@@ -6,8 +6,10 @@ import { Product } from "../entities/product.entity";
 const orderRepository = AppDataSource.getRepository(Order);
 
 
- const getAllService = async (): Promise<Order[]> => {
-        const orders = await orderRepository.find();
+ const getAllService = async () => {
+        const orders = await orderRepository.find({
+            relations: ['products'] 
+        });
 
         return orders;
   };

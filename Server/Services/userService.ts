@@ -8,7 +8,7 @@ const userRepository = AppDataSource.getRepository(User);
   };
 
 const getByIdService = async (id: number) => {
-    return await userRepository.findOneBy({ id });
+    return await userRepository.findOneBy({id});
   };
 
 const createUserService = async (username: string, firstName: string,
