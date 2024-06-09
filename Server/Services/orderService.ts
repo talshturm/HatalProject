@@ -6,13 +6,26 @@ import { Product } from "../entities/product.entity";
 const orderRepository = AppDataSource.getRepository(Order);
 
 
- const getAllService = async () => {
-    return await orderRepository.find();
+ const getAllService = async (): Promise<Order[]> => {
+        const orders = await orderRepository.find({
+            relations: ['products'] 
+        });
+
+        return orders;
   };
 
-const getByIdService = async (id: number) => {
-    return await orderRepository.findOneBy({ id });
-  };
+  const getByIdService = async (orderId: number): Promise<Order> => {
+    const order = await orderRepository.findOne({
+        where: { id: orderId },
+        relations: ['products'] 
+    });
+
+    if (!order) {
+        throw new Error(`Order with ID ${orderId} not found`);
+    }
+
+    return order;
+};
 
 const createOrderService = async (userId: number, productIds: number[], status: string): Promise<Order> => {
     const userRepository = AppDataSource.getRepository(User);
@@ -72,9 +85,11 @@ const updateOrderService = async (orderId: number, userId: number, productIds: n
     return await orderRepository.save(order);
 };
 
-const deleteOrderService = async (id: number) => {
+const deleteOrderService = async (id: number): Promise<void> => {
    const order = await orderRepository.findOneBy({ id });
-   if (!order) throw new Error("Order not found");
+   if (!order){
+    throw new Error(`Order with ID ${id} not found`);
+   } 
    await orderRepository.remove(order);
  };
 
