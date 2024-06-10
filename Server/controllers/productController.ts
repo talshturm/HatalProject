@@ -37,9 +37,9 @@ const getById = async (req: Request, res: Response) => {
 
   const updateProduct = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { name, description, price } = req.body;
+    const { name, description, price, image } = req.body;
     try {
-      await updateProductService(parseInt(id), name, description, price);
+      await updateProductService(parseInt(id), name, description, price, image);
       res.status(StatusCodes.OK).json({ message: 'Product updated successfully'});
     } catch (error) {
       res.status(StatusCodes.CONFLICT).send("Product update failed");
@@ -47,10 +47,10 @@ const getById = async (req: Request, res: Response) => {
   };
 
   const createProduct = async (req: Request, res: Response) => {
-    const { name, description, price } = req.body;
+    const { name, description, price, image } = req.body;
 
     try {
-       await createProductService(name, description, price);
+       await createProductService(name, description, price, image);
       res.status(StatusCodes.CREATED).json({ message: 'Product created successfully'});
     } catch (error) {
       res.status(StatusCodes.CONFLICT).send("Product creation failed");

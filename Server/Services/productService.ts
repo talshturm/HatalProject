@@ -11,21 +11,23 @@ const getByIdService = async (id: number) => {
     return await productRepository.findOneBy({ id });
   };
 
-  const createProductService = async (name: string, description: string, price: number) => {
+  const createProductService = async (name: string, description: string, price: number, image: string) => {
    const product = new Product();
    product.name = name;
    product.description = description;
    product.price = price;
+   product.image = image;
    return await productRepository.save(product);
  };
 
-const updateProductService = async (id: number, name: string, description: string, price: number) => {
+const updateProductService = async (id: number, name: string, description: string, price: number, image: string) => {
    const product = await productRepository.findOneBy({ id });
    if (!product) throw new Error("User not found");
    
    product.name = name;
    product.description = description;
    product.price = price;
+   product.image = image;
    return await productRepository.save(product);
  };
 
