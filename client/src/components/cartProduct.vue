@@ -1,0 +1,107 @@
+<template>
+  <div class="product-card">
+    <div class="product-info">
+      <img :src="product.image" :alt="product.name" class="product-image">
+      <div class="product-details">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <div class="product-description">{{ product.description }}</div>
+      </div>
+      <div class="product-price-trash">
+      <div class="product-price">₪ {{ product.price }}</div>
+      <button @click="removeFromCart" class="delete-button">
+        <i class="bi bi-trash"></i>
+      </button>
+    </div>
+    </div>
+    <hr class="separator">
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'cartProduct',
+  props: {
+    product: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    removeFromCart() {
+      // Add logic to remove the product from the cart
+    }
+  }
+}
+</script>
+
+<style scoped>
+.product-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto 20px;
+}
+
+.product-name {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-info {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px;
+  align-items: start;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-left: 20px;
+  margin-right: 40px;
+}
+
+.product-description {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 10px 0;
+}
+
+.product-price-trash {
+  display: flex;
+  align-items: center;
+}
+
+.product-price {
+  font-size: 1.4rem;
+  color: #333;
+  font-weight: bold;
+  margin-right: 20px; /* Add margin between price and trash icon */
+}
+
+.product-image {
+  width: 150px;
+  height: auto;
+  border: 1px solid #ddd;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.separator {
+  width: 100%;
+  border-top: 1px solid dimgray;
+  margin-top: 20px;
+}
+</style>

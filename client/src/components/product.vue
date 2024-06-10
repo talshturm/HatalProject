@@ -3,7 +3,7 @@
     <img :src="product.image" :alt="product.name" class="product-image">
     <div class="product-details">
       <h3 class="product-name">{{ product.name }}</h3>
-      <div class="product-price">{{ product.price }}₪</div>
+      <div class="product-price">{{ product.price }} ₪</div>
       <button class="add-to-cart-button" @click="addCart(product)">Add to Cart</button>
     </div>
   </div>

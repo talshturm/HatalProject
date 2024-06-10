@@ -28,8 +28,11 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    cartItems(state) {
+    cartProducts(state) {
       return state.cart;
+    },
+    cartItemCount: (state) => {
+      return state.cart.length;
     }
   }
 });
