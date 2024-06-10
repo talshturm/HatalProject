@@ -11,7 +11,7 @@
   
   
   <script>
-  import { mapActions } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   export default {
     name: 'product',
@@ -21,11 +21,19 @@
         required: true
       }
     },
-    methods: {
+    computed: {
+    ...mapGetters(['cartProducts'])
+  },
+  methods: {
     ...mapActions(['addToCart']),
     addCart(product) {
-      this.addToCart(product);
-      alert('Product added to cart!'); //use alertify
+      const existingProduct = this.cartProducts.find(item => item.id === product.id);
+      if (!existingProduct) {
+        this.addToCart(product);
+        alert('Product added to cart');
+      } else {
+        alert('Product is already in the cart');
+      }
     }
   }
   }

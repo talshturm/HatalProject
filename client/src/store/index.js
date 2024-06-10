@@ -23,6 +23,9 @@ export default new Vuex.Store({
     addToCart({ commit }, product) {
       commit('addToCart', product);
     },
+    removeFromCart({ commit }, productId) {
+      commit('removeFromCart', productId);
+    },
     clearCart({ commit }) {
       commit('clearCart');
     }

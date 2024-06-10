@@ -8,7 +8,7 @@
       </div>
       <div class="product-price-trash">
       <div class="product-price">₪ {{ product.price }}</div>
-      <button @click="removeFromCart" class="delete-button">
+      <button @click="removeProductFromCart(product.id)" class="delete-button">
         <i class="bi bi-trash"></i>
       </button>
     </div>
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'cartProduct',
   props: {
@@ -27,8 +29,9 @@ export default {
     }
   },
   methods: {
-    removeFromCart() {
-      // Add logic to remove the product from the cart
+    ...mapActions(['removeFromCart']),
+    removeProductFromCart(productId) {
+      this.removeFromCart(productId);
     }
   }
 }
