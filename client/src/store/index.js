@@ -22,7 +22,7 @@ export default new Vuex.Store({
   },
   actions: {
     async fetchProducts({ commit }) {
-      const response = await axios.get('https://localhost:8000/products');
+      const response = await axios.get('https://localhost:8080/products');
       commit('setProducts', response.data);
     },
   },
