@@ -16,7 +16,7 @@
             <router-link class="nav-link" to="/products" style="color: #555;">Products</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/cart" style="color: #555;">Cart</router-link>
+            <router-link class="nav-link" to="/cart" style="color: #555;"><i class="bi bi-cart"></i></router-link>
           </li>
         </ul>
         <form class="d-flex">
@@ -35,7 +35,6 @@ export default {
 </script>
 
 <style scoped>
-/* Custom styling for the navbar */
 .navbar-toggler-icon {
   background-color: #555;
 }

@@ -4,6 +4,7 @@ import router from './router/index'
 import store from './store/index';
 import 'bootstrap/dist/css/bootstrap.css';
 import { IconsPlugin } from 'bootstrap-vue';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 Vue.use(IconsPlugin);
 
