@@ -48,7 +48,6 @@
           console.log(response);
           if (response.status===200) {
             const user = response.data.user;
-            console.log(user);
             this.login(user);
             this.$emit('close');
             router.push('/');

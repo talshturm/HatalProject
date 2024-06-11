@@ -27,7 +27,7 @@ const getById = async (req: Request, res: Response) => {
 
 const createUser = async (req: Request, res: Response) => {
     const { username, firstName, lastName, password, address, email } = req.body;
-
+    
     try {
        await createUserService(username, firstName,
         lastName, password, address, email);
