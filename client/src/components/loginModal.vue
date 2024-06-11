@@ -14,10 +14,10 @@
             <label for="password" class="field-title">Password:</label>
             <input type="password" id="password" v-model="password" required>
           </div>
-          <button type="submit">Login</button>
+          <button type="submit" class="login-button">Login</button>
         </form>
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-        <p class="signup-text">Don't have an account? <router-link to="/signup">Sign up</router-link></p>
+        <p class="signup-text">Don't have an account? <button @click="handleSignUp" class="signup-button">Sign up</button></p>
       </div>
     </div>
   </template>
@@ -38,6 +38,10 @@
     },
     methods: {
         ...mapActions(['login']),
+        handleSignUp() {
+      this.$emit('close');
+      router.push('/signup');
+    },
       async userLogin() {
         try {
           const response = await api.userLogin(this.username, this.password);
@@ -125,7 +129,7 @@
     border-radius: 4px;
   }
   
-  button {
+  .login-button {
     width: 100%;
     padding: 8px 16px;
     background-color: #f8dede; 
@@ -135,7 +139,7 @@
     cursor: pointer;
   }
   
-  button:hover {
+  .login-button:hover {
     background-color: #ffb6c1;  
   }
   
@@ -149,6 +153,13 @@
     color: #888; 
     font-size: 0.9em; 
     margin-top: 15px;
+  }
+
+  .signup-button {
+    border: 0px;
+    background-color: white;
+    padding: 0%;
+    text-decoration: underline;
   }
   </style>
   
