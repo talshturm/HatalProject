@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     cart: [],
     products: [],
+    isAuthenticated: false,
   },
   mutations: {
     addToCart(state, product) {
@@ -17,7 +18,13 @@ export default new Vuex.Store({
     },
     clearCart(state) {
       state.cart = [];
-    }
+    },
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
   },
   actions: {
     addToCart({ commit }, product) {
@@ -28,7 +35,13 @@ export default new Vuex.Store({
     },
     clearCart({ commit }) {
       commit('clearCart');
-    }
+    },
+    login({ commit }) {
+      commit('login');
+    },
+    logout({ commit }) {
+      commit('logout');
+    },
   },
   getters: {
     cartProducts(state) {

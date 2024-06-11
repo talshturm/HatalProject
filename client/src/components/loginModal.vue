@@ -5,7 +5,7 @@
         <div class="header">
           <h3>Login</h3>
         </div>
-        <form @submit.prevent="login">
+        <form @submit.prevent="userLogin">
           <div class="form-group">
             <label for="username" class="field-title">Username:</label>
             <input type="text" id="username" v-model="username" required>
@@ -24,7 +24,9 @@
   
   <script>
   import api from '../services/users';
-  
+  import { mapActions } from 'vuex';
+  import router from '@/router';
+
   export default {
     name: 'LoginModal',
     data() {
@@ -35,12 +37,15 @@
       };
     },
     methods: {
-      async login() {
+        ...mapActions(['login']),
+      async userLogin() {
         try {
           const response = await api.userLogin(this.username, this.password);
           console.log(response);
           if (response.status===200) {
+            this.login();
             this.$emit('close');
+            router.push('/');
           } else {
             this.errorMessage = 'Invalid username or password';
           }

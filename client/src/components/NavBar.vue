@@ -16,22 +16,27 @@
         </ul>
         <div class="icons">
           <router-link class="nav-link cart" to="/cart" style="color: #555;"><i class="bi bi-cart"></i></router-link>
-          <button class="nav-link login" @click="emitOpenLoginModal" style="color: #555;">log in</button>
+          <router-link v-if="isAuthenticated" class="nav-link cart" to="/profile" style="color: #555;"><i class="bi bi-person"></i></router-link>
+          <button v-else class="nav-link" @click="emitOpenLoginModal" style="color: #555;">log in</button>
         </div>
-          <!-- <Router-link class="nav-link login" to="/profile" style="color: #555;"><i class="bi bi-person"></i></Router-link> -->
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'Navbar',
   methods: {
     emitOpenLoginModal() {
       this.$emit('open-login-modal');
     }
-  }
+  },
+  computed: {
+    ...mapState(['isAuthenticated']),
+  },
 }
 </script>
 
