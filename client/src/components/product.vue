@@ -1,11 +1,14 @@
 <template>
   <div class="product-card">
+    <div>
     <img :src="product.image" :alt="product.name" class="product-image">
     <div class="product-details">
       <h3 class="product-name">{{ product.name }}</h3>
+      <hr class="separator">
       <div class="product-price">{{ product.price }} ₪</div>
-      <button class="add-to-cart-button" @click="addCart(product)">Add to Cart</button>
     </div>
+  </div>
+    <button class="add-to-cart-button" @click="addCart(product)">Add to Cart</button>
   </div>
 </template>
   
@@ -47,6 +50,9 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 250px; 
   margin: 0 auto;
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .product-image {
@@ -72,18 +78,28 @@
 
 .add-to-cart-button {
   display: block;
-  width: 100%;
+  width: 90%;
   padding: 8px;
-  margin-top: 10px; 
   border: none;
   border-radius: 4px;
   background-color: #f8dede; 
   color: #333; 
   font-size: 0.9rem;
   cursor: pointer;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .add-to-cart-button:hover {
-  background-color: #ffb6c1; 
+  background-color: #ffb6c1;  
 }
+
+.separator {
+  border-top: 1.5px solid dimgray;
+  margin-top: 15px;
+  width: 50%;
+  margin-left: 24%;
+}
+
 </style>

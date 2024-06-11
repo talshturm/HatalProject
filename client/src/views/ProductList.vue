@@ -1,10 +1,12 @@
 <template>
     <div>
-      <header class="page-header">
+    <header class="page-header">
       <h1 class="page-title">Jewelry</h1>
     </header>
-        <product v-for="product in products" :key="product.id" :product="product" />
+    <div class="product-list">
+      <product v-for="product in products" :key="product.id" :product="product" />
     </div>
+  </div>
 </template>
 
 <script>
@@ -48,6 +50,18 @@ import product from '../components/product';
   font-family: 'Pacifico', cursive;
   letter-spacing: 1px;
   margin-bottom: 40px;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; 
+  padding-bottom: 50px;
+}
+
+.product {
+  width: calc(25% - 20px); 
+  margin-bottom: 20px;
 }
 
 </style>
