@@ -59,7 +59,6 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 20px;
   background-color: #fff;
   width: 100%;
   max-width: 800px;
@@ -122,6 +121,5 @@ export default {
 .separator {
   width: 100%;
   border-top: 1px solid dimgray;
-  margin-top: 20px;
 }
 </style>

@@ -39,8 +39,8 @@ export default new Vuex.Store({
     clearCart({ commit }) {
       commit('clearCart');
     },
-    login({ commit }) {
-      commit('login');
+    login({ commit }, user) {
+      commit('login', user);
     },
     logout({ commit }) {
       commit('logout');
@@ -53,8 +53,11 @@ export default new Vuex.Store({
     cartItemCount: (state) => {
       return state.cart.length;
     },
-    connectedUser: (state) => {
-      return state.connectedUser;
+    totalPrice: (state) => {
+      return state.cart.reduce((sum, product) => sum + product.price, 0);
+    },
+    productsIds: (state) => {
+      return state.cart.map(product => product.id);
     }
   }
 });

@@ -45,7 +45,6 @@
       async userLogin() {
         try {
           const response = await api.userLogin(this.username, this.password);
-          console.log(response);
           if (response.status===200) {
             const user = response.data.user;
             this.login(user);
