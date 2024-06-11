@@ -15,7 +15,8 @@
   
   <script>
   import { mapActions, mapGetters } from 'vuex';
-
+  import Swal from 'sweetalert2'
+  
   export default {
     name: 'product',
     props: {
@@ -33,9 +34,40 @@
       const existingProduct = this.cartProducts.find(item => item.id === product.id);
       if (!existingProduct) {
         this.addToCart(product);
-        alert('Product added to cart');
+        Swal.fire({
+        position: 'bottom-left',
+        icon: 'success',
+        title: 'Product added to cart',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true,
+        showClass: {
+            popup: ''
+          },
+          hideClass: {
+            popup: ''
+          },
+        customClass: {
+          container: 'swal-custom-container',
+        }})
       } else {
-        alert('Product is already in the cart');
+        Swal.fire({
+          position: 'bottom-left',
+          icon: 'warning',
+          title: 'Product is already in the cart',
+          showConfirmButton: false,
+          timer: 1500,
+          toast: true,
+          showClass: {
+            popup: ''
+          },
+          hideClass: {
+            popup: ''
+          },
+        customClass: {
+          container: 'swal-custom-container',
+        }
+        });
       }
     }
   }
