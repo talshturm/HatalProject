@@ -8,6 +8,7 @@ export default new Vuex.Store({
     cart: [],
     products: [],
     isAuthenticated: false,
+    connectedUser: null,
   },
   mutations: {
     addToCart(state, product) {
@@ -19,10 +20,12 @@ export default new Vuex.Store({
     clearCart(state) {
       state.cart = [];
     },
-    login(state) {
+    login(state, user) {
+      state.connectedUser = user;
       state.isAuthenticated = true;
     },
     logout(state) {
+      state.connectedUser = null;
       state.isAuthenticated = false;
     },
   },
@@ -49,6 +52,9 @@ export default new Vuex.Store({
     },
     cartItemCount: (state) => {
       return state.cart.length;
+    },
+    connectedUser: (state) => {
+      return state.connectedUser;
     }
   }
 });

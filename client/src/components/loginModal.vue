@@ -43,7 +43,9 @@
           const response = await api.userLogin(this.username, this.password);
           console.log(response);
           if (response.status===200) {
-            this.login();
+            const user = response.data.user;
+            console.log(user);
+            this.login(user);
             this.$emit('close');
             router.push('/');
           } else {
@@ -72,6 +74,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 999;
   }
   
   .login-modal-content {

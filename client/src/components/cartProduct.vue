@@ -19,6 +19,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import Swal from 'sweetalert2';
 
 export default {
   name: 'cartProduct',
@@ -32,6 +33,22 @@ export default {
     ...mapActions(['removeFromCart']),
     removeProductFromCart(productId) {
       this.removeFromCart(productId);
+      Swal.fire({
+        position: 'bottom-left',
+        icon: 'success',
+        title: 'Product removed from cart',
+        showConfirmButton: false,
+        timer: 1500,
+        toast: true,
+        showClass: {
+            popup: ''
+          },
+          hideClass: {
+            popup: ''
+          },
+        customClass: {
+          container: 'swal-custom-container',
+        }});
     }
   }
 }
