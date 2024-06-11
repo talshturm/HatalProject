@@ -11,11 +11,10 @@ export const loginService = async (username: string, password: string) => {
         throw new Error('Invalid username or password');
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
+    if (password!==user.password) {
         throw new Error('Invalid username or password');
     }
 
     const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
-    return { token, user: { id: user.id, username: user.username } };
+    return { token, user };
 };

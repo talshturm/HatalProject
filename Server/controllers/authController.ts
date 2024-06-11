@@ -9,6 +9,6 @@ export const login = async (req: Request, res: Response) => {
         const { token, user } = await loginService(username, password);
         res.json({ token, user });
     } catch (error) {
-        res.status(StatusCodes.BAD_REQUEST).json({ message: 'Something went wrong' });
+        res.status(StatusCodes.NOT_FOUND).json({ message: 'Something went wrong' });
     }
 };

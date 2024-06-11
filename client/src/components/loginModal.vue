@@ -1,0 +1,146 @@
+<template>
+    <div class="login-modal">
+      <div class="login-modal-content">
+        <span class="close" @click="$emit('close')"><i class="bi bi-x"></i></span>
+        <div class="header">
+          <h3>Login</h3>
+        </div>
+        <form @submit.prevent="login">
+          <div class="form-group">
+            <label for="username" class="field-title">Username:</label>
+            <input type="text" id="username" v-model="username" required>
+          </div>
+          <div class="form-group">
+            <label for="password" class="field-title">Password:</label>
+            <input type="password" id="password" v-model="password" required>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+        <p class="signup-text">Don't have an account? <router-link to="/signup">Sign up</router-link></p>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  import api from '../services/users';
+  
+  export default {
+    name: 'LoginModal',
+    data() {
+      return {
+        username: '',
+        password: '',
+        errorMessage: ''
+      };
+    },
+    methods: {
+      async login() {
+        try {
+          const response = await api.userLogin(this.username, this.password);
+          console.log(response);
+          if (response.status===200) {
+            this.$emit('close');
+          } else {
+            this.errorMessage = 'Invalid username or password';
+          }
+        } catch (error) {
+            if (error.response || error.response.status === 404) {
+                this.errorMessage = 'Invalid username or password';
+            } else {
+                this.errorMessage = 'An error occurred. Please try again.';
+            }   
+        }
+      }
+    }
+  };
+  </script>
+  
+  <style scoped>
+  .login-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+  }
+  
+  .login-modal-content {
+    position: relative; /* Ensure relative positioning for absolute positioning of the close button */
+    background-color: #fefefe;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 400px; /* Adjust width as needed */
+  }
+  
+  .header {
+    text-align: center;
+  }
+  
+  .header h3 {
+    font-family: 'Arial', sans-serif; /* Change to desired font */
+    font-size: 1.5em; /* Change to desired font size */
+    margin-bottom: 15px;
+  }
+  
+  .close {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2em; /* Change to desired font size */
+  }
+  
+  .field-title {
+    font-weight: bold;
+    font-size: 1em; /* Change to desired font size */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 8px 16px;
+    background-color: #f8dede; 
+    color: #333; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #ffb6c1;  
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .signup-text {
+    text-align: center;
+    color: #888; /* Change to desired color */
+    font-size: 0.9em; /* Change to desired font size */
+    margin-top: 15px;
+  }
+  </style>
+  

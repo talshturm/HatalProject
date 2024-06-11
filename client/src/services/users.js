@@ -16,10 +16,10 @@ export default {
   deleteUser(id) {
     return api.delete(`/users/${id}`);
   },
-  userLogin(username, password) {
+  userLogin(user, pass) {
     return api.post('/login',{
-        username: this.username,
-        password: this.password,
+        username: user,
+        password: pass,
       })
   }
 };
