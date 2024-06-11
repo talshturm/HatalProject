@@ -85,7 +85,7 @@ export default {
   font-size: 1.4rem;
   color: #333;
   font-weight: bold;
-  margin-right: 20px; /* Add margin between price and trash icon */
+  margin-right: 20px; 
 }
 
 .product-image {

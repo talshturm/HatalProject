@@ -75,12 +75,12 @@
   }
   
   .login-modal-content {
-    position: relative; /* Ensure relative positioning for absolute positioning of the close button */
+    position: relative; 
     background-color: #fefefe;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 400px; /* Adjust width as needed */
+    width: 400px; 
   }
   
   .header {
@@ -88,8 +88,8 @@
   }
   
   .header h3 {
-    font-family: 'Arial', sans-serif; /* Change to desired font */
-    font-size: 1.5em; /* Change to desired font size */
+    font-family: 'Arial', sans-serif; 
+    font-size: 1.5em; 
     margin-bottom: 15px;
   }
   
@@ -98,12 +98,12 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 1.2em; /* Change to desired font size */
+    font-size: 1.2em; 
   }
   
   .field-title {
     font-weight: bold;
-    font-size: 1em; /* Change to desired font size */
+    font-size: 1em; 
   }
   
   .form-group {
@@ -143,8 +143,8 @@
   
   .signup-text {
     text-align: center;
-    color: #888; /* Change to desired color */
-    font-size: 0.9em; /* Change to desired font size */
+    color: #888; 
+    font-size: 0.9em; 
     margin-top: 15px;
   }
   </style>

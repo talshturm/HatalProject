@@ -32,7 +32,7 @@ import product from '../components/product';
             const response = await api.getProducts();
             this.products = response.data;
         } catch (error) {
-          console.error(error); //alertify
+          console.error(error); 
         }
       }
     }
