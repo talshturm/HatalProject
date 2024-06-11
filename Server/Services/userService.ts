@@ -11,6 +11,14 @@ const getByIdService = async (id: number) => {
     return await userRepository.findOneBy({id});
   };
 
+  const getOrdersService = async (id: number) => {
+    const user = await userRepository.findOne({ where: { id: id }, relations: ['orders'] });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return user.orders;
+  };
+
 const createUserService = async (username: string, firstName: string,
      lastName: string, password: string, address: string, email: string) => {
     const user = new User();
@@ -43,4 +51,4 @@ const deleteUserService = async (id: number) => {
     await userRepository.remove(user);
   };
 
-  export { deleteUserService, updateUserService, createUserService, getAllService, getByIdService };
+  export { deleteUserService, updateUserService, createUserService, getAllService, getByIdService, getOrdersService };

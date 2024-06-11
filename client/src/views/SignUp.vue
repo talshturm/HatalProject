@@ -57,7 +57,7 @@
           <button type="submit" class="signup-button">Sign Up</button>
         </form>
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-        <p class="login-text">Already have an account? <router-link to="/login">Login</router-link></p>
+        <p class="login-text">Already have an account? <router-link to="/login" class="text-dark">Login</router-link></p>
       </div>
     </div>
   </template>

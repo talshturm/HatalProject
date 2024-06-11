@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getAllService, getByIdService, deleteUserService, createUserService, updateUserService } from "../Services/userService";
+import { getAllService, getByIdService, deleteUserService, createUserService, updateUserService, getOrdersService } from "../Services/userService";
 import { StatusCodes } from "http-status-codes";
 
 const getAll = async (req: Request, res: Response) => {
@@ -25,9 +25,20 @@ const getById = async (req: Request, res: Response) => {
     }
   };
 
+const getOrdersForUser = async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params; 
+      const orders = await getOrdersService(parseInt(id));
+      res.json(orders);
+    } catch (error) {
+      console.error(error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Internal server error' });
+    }
+  }
+
 const createUser = async (req: Request, res: Response) => {
     const { username, firstName, lastName, password, address, email } = req.body;
-    
+
     try {
        await createUserService(username, firstName,
         lastName, password, address, email);
@@ -59,4 +70,4 @@ const deleteUser = async (req: Request, res: Response) => {
     }
   };
 
-export { getAll, getById, deleteUser, updateUser, createUser };
+export { getAll, getById, deleteUser, updateUser, createUser, getOrdersForUser };
