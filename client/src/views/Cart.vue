@@ -15,7 +15,7 @@
           <h3 class="total-price">Total price: {{ totalPrice }} ₪</h3>
         </div>
         <button v-if="connectedUser" class="order-button" @click="createOrder">Checkout</button>
-        <p v-else class="notConnected">To checkout, please log in.</p>
+        <p v-else class="notConnected">To checkout, please log in</p>
         </div>
       </div>
       <p v-else class="empty-cart-message">Your cart is empty</p>

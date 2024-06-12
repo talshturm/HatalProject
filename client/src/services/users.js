@@ -7,6 +7,9 @@ export default {
   getUser(id) {
     return api.get(`/users/${id}`);
   },
+  getUserOrders(id) {
+    return api.get(`/users/${id}/orders`);
+  },
   createUser(user) {
     return api.post('/users', user);
   },

@@ -95,8 +95,10 @@
                 email: this.email
             }
             const response = await api.createUser(user);
+            console.log(response.status);
             if (response.status === 201) {
-                this.login(user);
+              const newUser = await api.userLogin(user.username, user.password);
+                this.login(newUser.data.user);
                 router.push('/');
             } else {
               this.errorMessage = 'An error occurred. Please try again.';
