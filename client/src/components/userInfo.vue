@@ -10,10 +10,14 @@
         <p><strong>Last Name:</strong> {{ user.lastName }}</p><hr class="line">
         <p><strong>Email:</strong> {{ user.email }}</p><hr class="line">
         <p><strong>Address:</strong> {{ user.address }}</p><hr class="line">
+        <button @click="handleLogout" class="logout">logout</button>
       </div>
     </div>
 </template>
 <script>
+  import router from '../router/index.js';
+  import { mapActions } from 'vuex';
+
   export default {
     name: 'UserInfo',
     props: {
@@ -21,7 +25,14 @@
       type: Object,
       required: true
     }
-  },
+  }, 
+  methods: {
+    ...mapActions(['logout']),
+      handleLogout() {
+        this.logout();
+        router.push('/');
+      }
+  }
   };
   </script>
   <style>
@@ -58,6 +69,13 @@
 .user-details {
   margin-top: 20px;
 }
+
+.logout {
+    background-color: white;
+    border: 0;
+    font-weight: bold;
+    padding: 0;
+  }
 
 .line{
     width: 60%;
