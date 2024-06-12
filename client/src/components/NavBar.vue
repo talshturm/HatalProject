@@ -16,7 +16,7 @@
         </ul>
         <div class="icons">
           <router-link class="nav-link cart" to="/cart" style="color: #555;"><i class="bi bi-cart"></i></router-link>
-          <router-link v-if="isAuthenticated" class="nav-link cart" to="/profile" style="color: #555;"><i class="bi bi-person"></i></router-link>
+          <router-link v-if="connectedUser" class="nav-link cart" to="/profile" style="color: #555;"><i class="bi bi-person"></i></router-link>
           <button v-else class="nav-link" @click="emitOpenLoginModal" style="color: #555;">log in</button>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isAuthenticated']),
+    ...mapState(['connectedUser']),
   },
 }
 </script>

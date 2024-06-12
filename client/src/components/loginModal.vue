@@ -49,7 +49,6 @@
             const user = response.data.user;
             this.login(user);
             this.$emit('close');
-            router.push('/');
           } else {
             this.errorMessage = 'Invalid username or password';
           }

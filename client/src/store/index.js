@@ -7,7 +7,6 @@ export default new Vuex.Store({
   state: {
     cart: [],
     products: [],
-    isAuthenticated: false,
     connectedUser: null,
   },
   mutations: {
@@ -22,11 +21,9 @@ export default new Vuex.Store({
     },
     login(state, user) {
       state.connectedUser = user;
-      state.isAuthenticated = true;
     },
     logout(state) {
       state.connectedUser = null;
-      state.isAuthenticated = false;
     },
   },
   actions: {

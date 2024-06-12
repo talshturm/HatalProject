@@ -39,7 +39,7 @@ import product from '../components/product';
   }
   </script>
   <style>
-  .page-header {
+.page-header {
   padding: 20px;
   text-align: center;
 }
@@ -55,13 +55,17 @@ import product from '../components/product';
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly; 
-  padding-bottom: 50px;
+  margin-right: 40px;
+  margin-left: 40px;
+  margin-bottom: 60px;
+  gap: 60px;
+  padding: 0 10px;
+  justify-content: flex-start;
 }
 
 .product {
-  width: calc(25% - 20px); 
-  margin-bottom: 20px;
+  flex: 1 1 calc(33.333% - 20px);
+  box-sizing: border-box; 
 }
 
 </style>

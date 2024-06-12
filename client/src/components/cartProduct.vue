@@ -1,5 +1,6 @@
 <template>
   <div class="product-card">
+    <hr class="separator">
     <div class="product-info">
       <img :src="product.image" :alt="product.name" class="product-image">
       <div class="product-details">
@@ -13,7 +14,6 @@
       </button>
     </div>
     </div>
-    <hr class="separator">
   </div>
 </template>
 

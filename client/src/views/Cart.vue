@@ -8,12 +8,14 @@
         <div class="product-card-wrapper" v-for="product in cartProducts" :key="product.id">
           <cartProduct :product="product" />
         </div>
+        <hr class="line">
         <div class="order-details">
           <div class="order-price">
           <p class="products-amount">Total products in cart: {{ cartItemCount }}</p>
           <h3 class="total-price">Total price: {{ totalPrice }} ₪</h3>
         </div>
-        <button class="order-button" @click="createOrder">Checkout</button>
+        <button v-if="connectedUser" class="order-button" @click="createOrder">Checkout</button>
+        <p v-else class="notConnected">To checkout, please log in.</p>
         </div>
       </div>
       <p v-else class="empty-cart-message">Your cart is empty</p>
@@ -158,5 +160,19 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+  .line {
+  width: 100%;
+  background-color: darkgray;
+  height: 2px;
+  border: none;
+  color: darkgray;
+  opacity: 100%;
+}
+
+  .notConnected {
+    font-size: 1rem;
+    color: #666;
+    width: 20%;
   }
 </style>
