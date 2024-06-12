@@ -85,7 +85,7 @@
   event.stopPropagation();
 
         if (!this.username || !this.firstName || !this.lastName || !this.email || !this.password || !this.address) {
-        this.errorMessage = 'Please fill in all fields.';
+        this.errorMessage = 'Please fill in all fields';
         return;
       }
       try {
@@ -103,10 +103,10 @@
           this.login(newUser.data.user);
           router.push('/');
         } else {
-          this.errorMessage = 'An error occurred. Please try again.';
+          this.errorMessage = 'An error occurred. Please try again';
         }
       } catch (error) {
-        this.errorMessage = 'An error occurred. Please try again.';
+        this.errorMessage = 'An error occurred. Please try again';
       }
     },
     },

@@ -57,7 +57,7 @@
             if (error.response || error.response.status === 404) {
                 this.errorMessage = 'Invalid username or password';
             } else {
-                this.errorMessage = 'An error occurred. Please try again.';
+                this.errorMessage = 'An error occurred. Please try again';
             }   
         }
       }
