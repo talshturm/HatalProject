@@ -17,7 +17,7 @@
           <button type="submit" class="login-button">Login</button>
         </form>
         <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-        <p class="signup-text">Don't have an account? <button @click="handleSignUp" class="signup-button">Sign up</button></p>
+        <p class="signup-text">Don't have an account? <button @click="signUp" class="signup-button">Sign up</button></p>
       </div>
     </div>
   </template>
@@ -38,7 +38,7 @@
     },
     methods: {
         ...mapActions(['login']),
-        handleSignUp() {
+        signUp() {
       this.$emit('close');
       router.push('/signup');
     },
@@ -49,6 +49,7 @@
             const user = response.data.user;
             this.login(user);
             this.$emit('close');
+            router.push('/');
           } else {
             this.errorMessage = 'Invalid username or password';
           }
