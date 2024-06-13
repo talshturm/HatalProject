@@ -60,7 +60,7 @@ export default {
       const response = await api.createOrder(order);
       if (response.status === 201) {
         this.clearCart();
-          router.push('/completedOrder');
+          router.push({ name: 'completedOrder', params: { id: response.data.id } });
         } else {
           Swal.fire({
           position: 'bottom-left',

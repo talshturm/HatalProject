@@ -52,8 +52,8 @@ const getById = async (req: Request, res: Response) => {
     const { userId, productIds, status, orderDate } = req.body;
 
     try {
-        await createOrderService(userId, productIds, status, new Date(orderDate));
-        res.status(StatusCodes.CREATED).json({ message: 'Order created successfully'});
+        const order = await createOrderService(userId, productIds, status, new Date(orderDate));
+        res.status(StatusCodes.CREATED).send(order);
     } catch (error) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Internal server error");
     }
