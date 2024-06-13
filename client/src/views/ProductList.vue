@@ -4,7 +4,7 @@
       <h1 class="page-title">Jewelry</h1>
     </header>
     <div class="product-list">
-      <product v-for="product in products" :key="product.id" :product="product" />
+      <product v-for="product in products" :key="product.id" :product="product"/>
     </div>
   </div>
 </template>
@@ -34,7 +34,7 @@ import product from '../components/product';
         } catch (error) {
           console.error(error); 
         }
-      }
+      },
     }
   }
   </script>

@@ -13,7 +13,7 @@ Vue.use(Router);
 const routes = [
   { path: '/', component: Home },
   { path: '/products', component: ProductList },
-  { path: '/products/:id', component: ProductDetail },
+  { path: '/products/:id', name: 'ProductDetails', component: ProductDetail },
   { path: '/cart', component: Cart },
   { path: '/signup', component: SignUp },
   { path: '/profile', component: Profile },

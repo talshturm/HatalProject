@@ -1,6 +1,6 @@
 <template>
   <div class="product-card">
-    <div>
+    <div  @click="viewProductDetails(product.id)">
     <img :src="product.image" :alt="product.name" class="product-image">
     <div class="product-details">
       <h3 class="product-name">{{ product.name }}</h3>
@@ -16,6 +16,7 @@
   <script>
   import { mapActions, mapGetters } from 'vuex';
   import Swal from 'sweetalert2'
+  import router from '../router/index.js';
   
   export default {
     name: 'product',
@@ -30,6 +31,9 @@
   },
   methods: {
     ...mapActions(['addToCart']),
+    viewProductDetails(productId) {
+      router.push({ name: 'ProductDetails', params: { id: productId } });
+    },
     addCart(product) {
       const existingProduct = this.cartProducts.find(item => item.id === product.id);
       if (!existingProduct) {
