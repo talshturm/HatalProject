@@ -1,7 +1,7 @@
 <template>
     <div class="cart-container">
     <header class="page-header">
-      <h1 class="page-title">my Cart</h1>
+      <h1 class="page-title">My Cart</h1>
     </header>
     <div class="cart-products">
       <div v-if="cartProducts.length">
@@ -18,7 +18,13 @@
         <p v-else class="notConnected">To checkout, please log in</p>
         </div>
       </div>
-      <p v-else class="empty-cart-message">Your cart is empty</p>
+      <div v-else class="empty-cart-message">
+        Your cart is empty
+        <div>
+          <br/>
+          <button class="shop-button" @click="startShopping">Start shopping now!</button>
+        </div>
+      </div>
     </div> <br/><br/>
 </div>
 </template>
@@ -40,6 +46,9 @@ export default {
   },
   methods: {
     ...mapActions(['clearCart']),
+    startShopping() {
+      router.push('/products');
+    },
     async createOrder() {
       try{
       const order = {
@@ -143,7 +152,7 @@ export default {
 }
 
 .order-button {
-  background-color: #ffb6c1;
+  background-color: #f8dede;
   width: 25%;
   padding: 8px 16px;
     color: #333; 
@@ -152,7 +161,7 @@ export default {
     cursor: pointer;
 }
 .order-button:hover {
-  background-color: #f8dede; 
+  background-color: #ffb6c1; 
   }
 
   .order-details {
@@ -175,4 +184,23 @@ export default {
     color: #666;
     width: 20%;
   }
+
+  .shop-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f8dede; 
+  color: #333; 
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.shop-button:hover {
+  background-color: #ffb6c1;  
+}
 </style>

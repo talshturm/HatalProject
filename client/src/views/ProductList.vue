@@ -61,11 +61,6 @@ import product from '../components/product';
   gap: 60px;
   padding: 0 10px;
   justify-content: flex-start;
-}
-
-.product {
-  flex: 1 1 calc(33.333% - 20px);
-  box-sizing: border-box; 
-}
+} 
 
 </style>

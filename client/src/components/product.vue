@@ -84,11 +84,13 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 250px; 
   margin: 0 auto;
   display: flex; 
+  max-width: 23%;
   flex-direction: column;
   justify-content: space-between;
+  flex: 1 1 calc(25% - 20px);
+  box-sizing: border-box; 
 }
 
 .product-image {
