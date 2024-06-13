@@ -4,7 +4,7 @@ export default {
   getFeedbacks() {
     return api.get('/feedbacks');
   },
-  createFeedback() {
-    return api.post('/feedbacks')
+  createFeedback(feedback) {
+    return api.post('/feedbacks', feedback)
   }
 };
