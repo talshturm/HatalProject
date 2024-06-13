@@ -26,10 +26,12 @@
         
     </table>
     </div>
+    <button class="home-button" @click="toHome">Back to home page</button>
 </div>
 </template>
 <script>
-import api from '../services/orders.js'
+import api from '../services/orders.js';
+import router from '../router/index.js';
 
 export default {
 data() {
@@ -41,6 +43,9 @@ created() {
     this.fetchProducts()
 },
 methods: {
+    toHome() {
+      router.push('/');
+    },
     async fetchProducts() {
       try {
         const orderId = this.$route.params.id;
@@ -94,5 +99,25 @@ methods: {
 }
 .price {
     text-align: right;
+}
+
+.home-button {
+  display: block;
+  width: 15%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f8dede; 
+  color: #333; 
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.home-button:hover {
+  background-color: #ffb6c1;  
 }
 </style>
