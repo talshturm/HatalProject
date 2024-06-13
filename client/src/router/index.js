@@ -7,6 +7,7 @@ import Cart from '@/views/Cart.vue';
 import SignUp from '@/views/SignUp.vue';
 import Profile from '@/views/Profile.vue';
 import CompletedOrder from '@/views/CompletedOrder.vue';
+import Feedback from '@/views/Feedback.vue';
 
 Vue.use(Router);
 
@@ -17,7 +18,8 @@ const routes = [
   { path: '/cart', component: Cart },
   { path: '/signup', component: SignUp },
   { path: '/profile', component: Profile },
-  { path: '/completedOrder', component: CompletedOrder}
+  { path: '/completedOrder', component: CompletedOrder},
+  { path: '/feedback', component: Feedback}
 ];
 
 export default new Router({
