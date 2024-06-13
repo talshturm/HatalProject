@@ -1,20 +1,25 @@
 <template>
   <div id="app">
-    <Navbar @open-login-modal="openLoginModal" />
-    <LoginModal v-if="showLoginModal" @close="showLoginModal = false" />
-    <router-view @open-login-modal="openLoginModal"></router-view>
+    <div class="content">
+      <Navbar @open-login-modal="openLoginModal" />
+      <LoginModal v-if="showLoginModal" @close="showLoginModal = false" />
+      <router-view @open-login-modal="openLoginModal"></router-view>
+    </div>
+      <Contact />
   </div>
 </template>
 
 <script>
 import Navbar from './components/NavBar';
 import LoginModal from './components/loginModal.vue';
+import Contact from './components/contact.vue';
 
-  export default {
+export default {
   name: 'App',
   components: {
     Navbar,
-    LoginModal
+    LoginModal,
+    Contact
   },
   data() {
     return {
@@ -30,5 +35,14 @@ import LoginModal from './components/loginModal.vue';
 </script>
 
 <style>
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
 
+.content {
+  flex: 1; 
+}
 </style>
