@@ -51,4 +51,12 @@ export default {
 .cart{
   font-size: 25px;
 }
+
+.navbar {
+  width: 100%;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 </style>

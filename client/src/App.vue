@@ -40,6 +40,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
   position: relative;
+  padding-top: 70px;
 }
 
 .content {

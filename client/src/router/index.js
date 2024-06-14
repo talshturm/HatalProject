@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/views/Home.vue';
@@ -25,4 +26,9 @@ const routes = [
 export default new Router({
   mode: 'history',
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    return { x: 0, y: 0 };
+  }
 });
+
+/* eslint-enable */
