@@ -15,7 +15,10 @@
           </li>
         </ul>
         <div class="icons">
-          <router-link class="nav-link cart" to="/cart" style="color: #555;"><i class="bi bi-cart"></i></router-link>
+          <router-link class="nav-link cart" to="/cart" style="color: #555;">
+            <i class="bi bi-cart"></i>
+            <span class="badge" v-if="cartItemCount">{{ cartItemCount }}</span>
+          </router-link>
           <router-link v-if="connectedUser" class="nav-link cart" to="/profile" style="color: #555;"><i class="bi bi-person"></i></router-link>
           <button v-else class="nav-link" @click="emitOpenLoginModal" style="color: #555;">log in</button>
         </div>
@@ -25,7 +28,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'Navbar',
@@ -36,6 +39,7 @@ export default {
   },
   computed: {
     ...mapState(['connectedUser']),
+    ...mapGetters(['cartItemCount']),
   },
 }
 </script>
@@ -50,11 +54,23 @@ export default {
 
 .cart{
   font-size: 25px;
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -11px;
+  background-color: #fe99a8;
+  color: white;
+  border-radius: 50%;
+  padding: 3.5px 6px;
+  font-size: 12px;
 }
 
 .navbar {
   width: 100%;
-  z-index: 1000;
+  z-index: 1;
   position: fixed;
   top: 0;
   left: 0;
