@@ -1,14 +1,14 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8dede;">
     <div class="container">
-      <router-link class="navbar-brand" to="/">
+      <router-link class="brand-picture" to="/">
         <img src='../../public/foxIcon.png' width="50">
       </router-link>
       
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <router-link class="nav-link" to="/" style="color: #555;">Home</router-link>
+            <router-link class="nav-link logo" to="/">STZ</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/products" style="color: #555;">Products</router-link>
@@ -50,6 +50,17 @@ export default {
   flex-direction: row;
   width: 7%;
   justify-content: space-between;
+}
+
+.brand-picture {
+  padding-right: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.logo {
+  color: black; 
+  margin-right: 15px;
 }
 
 .cart{
