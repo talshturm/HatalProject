@@ -7,7 +7,7 @@
 <h3>Thank you for shopping with us</h3>
 <div>Your order has been placed and will soon be on its way to you</div>
     </div>
-    <br/>
+    <br/><br/>
     <h4>order details:</h4>
     <div class="products-table-container">
     <table class="products-table">
@@ -21,6 +21,10 @@
               <tr v-for="product in products" :key="product.id">
             <td class="name">{{ product.name }}</td>
             <td class="price">{{ product.price }} ₪</td>
+        </tr>
+        <tr>
+            <td class="total">Total price</td>
+            <td class="total-price">{{  totalPrice }} ₪</td>
         </tr>
             </tbody>
         
@@ -37,6 +41,7 @@ export default {
 data() {
     return {
         products: [],
+        totalPrice:'',
     };
 },
 created() {
@@ -51,6 +56,7 @@ methods: {
         const orderId = this.$route.params.id;
         const response = await api.getOrder(orderId);
         this.products = response.data.products;
+        this.totalPrice = response.data.totalPrice;
       } catch (error) {
         console.error(error); 
       }
@@ -83,22 +89,39 @@ methods: {
   border-collapse: collapse;
 }
 
-.products-table td {
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
-}
-
 .products-table th {
     border-bottom: 2px solid rgb(206, 206, 206);
     padding: 10px;
+    border-top: none;
+  }
+
+  .page-header {
+    padding-bottom: 0;
   }
 
 .name {
     text-align: left;
     padding: 10px;
+    border-top: 1px solid #ccc;
 }
 .price {
     text-align: right;
+    border-top: 1px solid #ccc;
+  padding: 10px;
+}
+
+.total {
+    border-top: 1px solid black;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.total-price {
+    text-align: right;
+    font-weight: bold;
+    padding: 10px;
+    border-top: 1px solid black;
 }
 
 .home-button {
