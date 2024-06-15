@@ -75,6 +75,7 @@
     border: 0;
     font-weight: bold;
     padding: 0;
+    margin-bottom: 20px;
   }
 
 .line{

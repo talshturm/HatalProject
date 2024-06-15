@@ -12,7 +12,7 @@ const getByIdService = async (id: number) => {
   };
 
   const getOrdersService = async (id: number) => {
-    const user = await userRepository.findOne({ where: { id: id }, relations: ['orders'] });
+    const user = await userRepository.findOne({ where: { id: id }, relations: ['orders', 'orders.products'] });
     if (!user) {
       throw new Error('User not found');
     }

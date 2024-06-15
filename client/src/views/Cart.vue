@@ -15,7 +15,7 @@
           <h3 class="total-price">Total price: {{ totalPrice }} ₪</h3>
         </div>
         <button v-if="connectedUser" class="order-button" @click="createOrder">Checkout</button>
-        <p v-else class="notConnected">To checkout, please log in</p>
+        <p v-else class="notConnected">To checkout, please <button class="login-button" @click="openLoginModal">log in</button></p>
         </div>
       </div>
       <div v-else class="empty-cart-message">
@@ -48,6 +48,9 @@ export default {
     ...mapActions(['clearCart']),
     startShopping() {
       router.push('/products');
+    },
+    openLoginModal() {
+      this.$emit('open-login-modal');
     },
     async createOrder() {
       try{
@@ -203,4 +206,11 @@ export default {
 .shop-button:hover {
   background-color: #ffb6c1;  
 }
+
+.login-button {
+    background-color: white;
+    border: 0;
+    padding: 0;
+    text-decoration: underline;
+  }
 </style>
